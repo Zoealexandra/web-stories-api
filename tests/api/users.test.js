@@ -42,3 +42,18 @@ test('/users/:id returns a user by ID', () => {
     })
 })
 
+// testing to ensure updated user details are correct
+test('/users/:id/edit returns editable user info', () => {
+  const expected = 'anthony'
+  return request(server)
+    .get('/users/99901/edit')
+    .expect('Content-Type', /json/)
+    .expect(200)
+    .then(res => {
+      expect(res.body.user.name).toBe(expected)
+      expect(res.body.user.email).toBe('anthony@example.com')
+    })
+    .catch(err => {
+      expect(err).toBeFalsy()
+    })
+})

@@ -6,7 +6,8 @@ module.exports = {
   getUsers,
   getUser,
   addUser,
-  updateUser
+  updateUser,
+  getActivities
 }
 
 function getUsers (testDb) {
@@ -27,4 +28,9 @@ function addUser (user, testDb) {
 function updateUser (id, user, testDb) {
   const db = testDb || connection
   return db('users').where('id', id).update(user)
+}
+
+function getActivities (testDb) {
+  const db = testDb || connection
+  return db('activities').select()
 }
