@@ -14,4 +14,15 @@ router.get('/', (req, res) => {
     })
 })
 
+router.post('/', (req, res) => {
+  const act = req.body
+  db.addActivity(act)
+    .then(activity => {
+      res.json({act: activity})
+    })
+    .catch(err => {
+      res.status(500).send('DATABASE ERROR: ' + err.message)
+    })
+})
+
 module.exports = router
