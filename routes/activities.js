@@ -25,4 +25,28 @@ router.post('/', (req, res) => {
     })
 })
 
+router.put('/:id/edit', (req, res) => {
+  const id = req.params.id
+  const activity = req.body
+  db.updateActivity(id, activity)
+    .then(activity => {
+      res.json({activity: activity})
+    })
+    .catch(err => {
+      res.status(500).send('DATABASE ERROR: ' + err.message)
+    })
+})
+
+router.delete('/:id/delete', (req, res) => {
+  const id = req.params.id
+  const activity = req.body
+  db.deleteActivity(id, activity)
+    .then(activity => {
+      res.json({activity: activity})
+    })
+    .catch(err => {
+      res.status(500).send('DATABASE ERROR: ' + err.message)
+    })
+})
+
 module.exports = router
